@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letters 💌</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Quicksand:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* PAGE-SPECIFIC STYLES */
+        body.messages-page {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 25%, #FFB6C1 50%, #E6E6FA 75%, #F8E8F5 100%);
+            min-height: 100vh;
+        }
+        
+        .messages-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+            position: relative;
+            z-index: 20;
+        }
+        
+        /* Header */
+        .messages-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .messages-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            background: linear-gradient(135deg, #FFB6C1, #E6E6FA, #FFC0CB);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 30px rgba(255, 182, 193, 0.8));
+            animation: titleFloat 4s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        .header-letters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .letter-icon {
+            font-size: 2.5rem;
+            animation: letterBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 182, 193, 0.7));
+        }
+        
+        .letter-icon:nth-child(1) { animation-delay: 0s; }
+        .letter-icon:nth-child(2) { animation-delay: 0.4s; }
+        .letter-icon:nth-child(3) { animation-delay: 0.8s; }
+        .letter-icon:nth-child(4) { animation-delay: 1.2s; }
+        .letter-icon:nth-child(5) { animation-delay: 1.6s; }
+        
+        @keyframes letterBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(-10deg); }
+            75% { transform: translateY(-5px) rotate(10deg); }
+        }
+        
+        /* Messages Grid */
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 70px 50px;
+            margin-top: 60px;
+        }
+        
+        /* Envelope Card Container */
+        .envelope-card {
+            position: relative;
+            height: 320px;
+            perspective: 1500px;
+            cursor: pointer;
+            animation: floatEnvelope 5s ease-in-out infinite;
+        }
+        
+        .envelope-card:nth-child(1) { animation-delay: 0s; }
+        .envelope-card:nth-child(2) { animation-delay: 0.8s; }
+        .envelope-card:nth-child(3) { animation-delay: 1.6s; }
+        .envelope-card:nth-child(4) { animation-delay: 2.4s; }
+        .envelope-card:nth-child(5) { animation-delay: 3.2s; }
+        .envelope-card:nth-child(6) { animation-delay: 4s; }
+        .envelope-card:nth-child(7) { animation-delay: 4.8s; }
+        .envelope-card:nth-child(8) { animation-delay: 5.6s; }
+        
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .envelope-card:hover {
+            z-index: 100;
+        }
+        
+        /* Flip Card Inner */
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .envelope-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        /* Front & Back Shared */
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+        }
+        
+        /* Envelope Front */
+        .card-front {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 50px rgba(255, 182, 193, 0.4),
+                        inset 0 0 40px rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Envelope Flap Design */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(135deg,
+                rgba(255, 182, 193, 0.5),
+                rgba(230, 230, 250, 0.5)
+            );
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.6s ease;
+        }
+        
+        .envelope-card:hover .envelope-flap {
+            transform: translateY(-10px);
+            opacity: 0.8;
+        }
+        
+        /* Envelope Icon */
+        .envelope-icon {
+            font-size: 5rem;
+            filter: drop-shadow(0 8px 25px rgba(255, 182, 193, 0.7));
+            animation: envelopePulse 3s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes envelopePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Wax Seal */
+        .wax-seal {
+            position: absolute;
+            bottom: 30px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255, 100, 130, 0.9), rgba(200, 50, 80, 0.8));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(255, 100, 130, 0.6),
+                        inset 0 2px 10px rgba(0, 0, 0, 0.2);
+            border: 3px solid rgba(255, 182, 193, 0.6);
+            animation: sealGlow 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes sealGlow {
+            0%, 100% { box-shadow: 0 5px 20px rgba(255, 100, 130, 0.6); }
+            50% { box-shadow: 0 5px 35px rgba(255, 100, 130, 0.9); }
+        }
+        
+        /* Click Hint */
+        .click-hint {
+            position: absolute;
+            bottom: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 2px 10px rgba(255, 182, 193, 0.6);
+            animation: hintBlink 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes hintBlink {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        /* Decorative Stamps */
+        .stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border: 3px dashed rgba(255, 182, 193, 0.7);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transform: rotate(15deg);
+            animation: stampWiggle 4s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes stampWiggle {
+            0%, 100% { transform: rotate(15deg); }
+            50% { transform: rotate(20deg) scale(1.05); }
+        }
+        
+        /* Decorative Ribbon */
+        .ribbon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 40px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 182, 193, 0.4),
+                rgba(230, 230, 250, 0.4),
+                rgba(255, 182, 193, 0.4),
+                transparent
+            );
+            z-index: 5;
+        }
+        
+        /* Letter Back (Message) */
+        .card-back {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(25px);
+            border: 3px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.5),
+                        inset 0 0 50px rgba(255, 255, 255, 0.3);
+            transform: rotateY(180deg);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Letter Paper Texture */
+        .card-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 30px,
+                rgba(255, 182, 193, 0.1) 30px,
+                rgba(255, 182, 193, 0.1) 31px
+            );
+            pointer-events: none;
+        }
+        
+        /* Message Text */
+        .message-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+        }
+        
+        .message-decoration {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .msg-heart {
+            font-size: 1.5rem;
+            animation: heartPulse 1.5s ease-in-out infinite;
+        }
+        
+        .msg-heart:nth-child(1) { animation-delay: 0s; }
+        .msg-heart:nth-child(2) { animation-delay: 0.3s; }
+        .msg-heart:nth-child(3) { animation-delay: 0.6s; }
+        
+        /* Back Button */
+        .flip-back-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 25px;
+            border-radius: 25px;
+            background: rgba(255, 182, 193, 0.4);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.4);
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+        
+        .flip-back-btn:hover {
+            transform: translateX(-50%) scale(1.05);
+            background: rgba(255, 182, 193, 0.6);
+        }
+        
+        /* Card Decorations */
+        .card-decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: cardDecoFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 3px 10px rgba(255, 182, 193, 0.5));
+            pointer-events: none;
+        }
+        
+        .cd-1 { top: -15px; left: -15px; animation-delay: 0s; }
+        .cd-2 { top: -15px; right: -15px; animation-delay: 0.5s; }
+        .cd-3 { bottom: -15px; left: -15px; animation-delay: 1s; }
+        .cd-4 { bottom: -15px; right: -15px; animation-delay: 1.5s; }
+        
+        @keyframes cardDecoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+        
+        /* Navigation */
+        .nav-bottom {
+            text-align: center;
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 15px 40px rgba(255, 182, 193, 0.5);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.7);
+        }
+        
+        .btn-icon {
+            font-size: 1.5rem;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Floating Letter Decorations */
+        .letter-floats {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 7;
+        }
+        
+        .float-letter {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.4;
+            animation: letterFloat 18s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 182, 193, 0.7));
+        }
+        
+        .lf-1 { top: 12%; left: 6%; animation-delay: 0s; }
+        .lf-2 { top: 22%; right: 8%; animation-delay: 3s; }
+        .lf-3 { bottom: 18%; left: 10%; animation-delay: 6s; }
+        .lf-4 { bottom: 28%; right: 12%; animation-delay: 9s; }
+        .lf-5 { top: 55%; left: 7%; animation-delay: 12s; }
+        .lf-6 { top: 65%; right: 9%; animation-delay: 15s; }
+        
+        @keyframes letterFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1); 
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translateY(-35px) rotate(180deg) scale(1.2); 
+                opacity: 0.7;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .messages-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .messages-title {
+                font-size: 3.5rem;
+            }
+            
+            .envelope-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .messages-title {
+                font-size: 2.8rem;
+            }
+            
+            .message-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body class="messages-page">
+    <!-- SVG Filters -->
+    <svg class="svg-filters" style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Multiple Layered Backgrounds -->
+    <div class="bg-layer bg-layer-1"></div>
+    <div class="bg-layer bg-layer-2"></div>
+    <div class="bg-layer bg-layer-3"></div>
+
+    <!-- Glowing Orbs -->
+    <div class="glow-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="floating-hearts"></div>
+
+    <!-- Sparkles -->
+    <div class="sparkles-container"></div>
+
+    <!-- Letter Floating Decorations -->
+    <div class="letter-floats">
+        <div class="float-letter lf-1">💌</div>
+        <div class="float-letter lf-2">💕</div>
+        <div class="float-letter lf-3">✉️</div>
+        <div class="float-letter lf-4">💖</div>
+        <div class="float-letter lf-5">💝</div>
+        <div class="float-letter lf-6">💗</div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control">
+        <div class="music-btn-glow"></div>
+        <button class="music-btn" id="musicToggle">
+            <span class="music-decoration">✨</span>
+            <span class="music-icon">🎵</span>
+            <span class="music-text">Music</span>
+        </button>
+    </div>
+
+    <!-- Corner Flourishes -->
+    <div class="corner-flourish tl">
+        <span class="flourish-element">💌</span>
+        <div class="flourish-line"></div>
+        <span class="flourish-element">💖</span>
+    </div>
+    <div class="corner-flourish tr">
+        <span class="flourish-element">💕</span>
+        <div class="flourish-line"></div>
+        <span class="flourish-element">✉️</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="messages-container">
+        <!-- Messages Header -->
+        <div class="messages-header">
+            <h1 class="messages-title">
+                Love Letters For You 💌
+            </h1>
+            <div class="header-letters">
+                <span class="letter-icon">💌</span>
+                <span class="letter-icon">💖</span>
+                <span class="letter-icon">✉️</span>
+                <span class="letter-icon">💕</span>
+                <span class="letter-icon">💝</span>
+            </div>
+        </div>
+
+        <!-- Messages Grid -->
+        <div class="messages-grid">
+            <!-- Letter 1 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🌸</div>
+                <div class="card-decoration cd-2">✨</div>
+                <div class="card-decoration cd-3">🌟</div>
+                <div class="card-decoration cd-4">💫</div>
+                
+                <div class="card-inner">
+                    <!-- Front -->
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">💕</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <!-- Back -->
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 umm sunooooooooooooooo............. 🙈 hmmm hmmm tummmmmmm tumheeee hi bol raha dishuuuuuuuuuu 💖 to baat ye hai ki ...... 😳 matalab kaise bolu 🌹 hmmm matalab ye ki ........ 💝 chalo ab next wala padho 💫✨
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">💖</span>
+                            <span class="msg-heart">💗</span>
+                            <span class="msg-heart">💝</span>
+                            <span class="msg-heart">🌹</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 2 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🎀</div>
+                <div class="card-decoration cd-2">💐</div>
+                <div class="card-decoration cd-3">🌺</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🌸</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💕</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 hmm to ye hai ki uo start day yaad hai ..... 💖 mai uss din ka na bol raha tha jab hum mile the ....... 🌹 umm uss din ka hai jab hum peheli baar ek dusre ko apni feelings bataye the.......... 😊 hmm to ye itna hi ab dusre page me dekho khol ke 💝✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">💖</span>
+                            <span class="msg-heart">💗</span>
+                            <span class="msg-heart">💝</span>
+                            <span class="msg-heart">🌹</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 3 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🌹</div>
+                <div class="card-decoration cd-2">💫</div>
+                <div class="card-decoration cd-3">✨</div>
+                <div class="card-decoration cd-4">🌟</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🌹</div>
+                        <div class="envelope-icon">✉️</div>
+                        <div class="wax-seal">💗</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 to yahi bol raha tha uss din pata hai meko aisa laga tha ki ..................... 💖 meko ek aisi ladki mili jo real me meko pasand thi 😅😅 🌹 sach me uo bahot achha tha 🥺❤️ 💝 ab yaha nhi dusre message wala kholo 😁😁 ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">💖</span>
+                            <span class="msg-heart">💗</span>
+                            <span class="msg-heart">🥺</span>
+                            <span class="msg-heart">😊</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 4 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🦋</div>
+                <div class="card-decoration cd-2">🌸</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">💖</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">🌸</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 hm to thank you soooooooooooooo mucccchhhhhhhhhh disha 🥺❤️ 💖 mere ko pasand karne ke liye mere jaise ladko 😄 🌹 hmm tum jitna bolo mai pr meko lagta mai nhi tha tere layak jise tu pasand ki 🥲😅 💝 thora sa next wala open to karo baby ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">🥺</span>
+                            <span class="msg-heart">😊</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 5 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">💐</div>
+                <div class="card-decoration cd-2">🌟</div>
+                <div class="card-decoration cd-3">🎀</div>
+                <div class="card-decoration cd-4">💫</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🌺</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💕</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 mere jaise nalayak 😄 💖 hmm sach kahu to bas mera face samne se thora sahi dikhta usme bhi vc me theda aata pr body nhi😭😭 🥺 tum meko kaise pasand ki 😭😔 💝 mere me itni kami hai yrr kya batau 😭 🌹 ab next wala kholo ab kitni burai karu apna mai 😭😭😭😭😭😭😭 ✨
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">💖</span>
+                            <span class="msg-heart">😭</span>
+                            <span class="msg-heart">🥺</span>
+                            <span class="msg-heart">💝</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 6 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🌸</div>
+                <div class="card-decoration cd-2">💖</div>
+                <div class="card-decoration cd-3">✨</div>
+                <div class="card-decoration cd-4">🌟</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">💗</div>
+                        <div class="envelope-icon">✉️</div>
+                        <div class="wax-seal">🌹</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 but sab ke liye thanks ...... 💖 aur ek baat mai bahot love karta tumse 😘❤️ 🌹 aur karta rahunga 🙈🙈 💝 samajh aaaya aur tum bhi aise hi karte rehna mere se darling ❤️❤️ ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">😘</span>
+                            <span class="msg-heart">🙈</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 7 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">💫</div>
+                <div class="card-decoration cd-2">🌺</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">💝</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 aur ye hai ki 😜 💖 tum mere dil chori kar li ho na 😭 🌹 bas use bech mat dena 😢 💝 aur hmm sambhal ke rakhna 👉👈 please baby ✨💫❤️
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">😭</span>
+                            <span class="msg-heart">👉👈</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 8 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🌟</div>
+                <div class="card-decoration cd-2">🎀</div>
+                <div class="card-decoration cd-3">💖</div>
+                <div class="card-decoration cd-4">🌸</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🌹</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💗</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 hmm agar chahiye kuchh special special.....😘 💖 moment ke message to uske badle chocolate khilana hoga 😍😍😍😋😉 🍫❤️✨
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">😘</span>
+                            <span class="msg-heart">😍</span>
+                            <span class="msg-heart">🍫</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 9 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🍫</div>
+                <div class="card-decoration cd-2">💰</div>
+                <div class="card-decoration cd-3">😂</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">😘</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 waise to kuchh bhi maang sakta pr chocolate hi kaafi hai 😂😂 💖 kyuki baaki to mehnga aata na 😒 🌹 aur ye sab tab lunga jab tum kamaogi mai to soch rakha tere paise se mai maje karunga 😍😍😘 ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">😂</span>
+                            <span class="msg-heart">😘</span>
+                            <span class="msg-heart">🍫</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 10 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">😏</div>
+                <div class="card-decoration cd-2">💕</div>
+                <div class="card-decoration cd-3">🚀</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">😂</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 hmm agar nhi chahiye to koi na 😏 💖 meko dene ka man bhi nhi hai 😂🥱 🌹 aur hmm ye din gya ab...................... 💝 aur ab chalte kisi aur din pe lets go babyyyyyyyyyyyyyyyy.................. ✨💫❤️
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">😏</span>
+                            <span class="msg-heart">😂</span>
+                            <span class="msg-heart">🚀</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 11 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🎁</div>
+                <div class="card-decoration cd-2">😭</div>
+                <div class="card-decoration cd-3">💖</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🥺</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">💕</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 to ab baat hai mere baday ke din ka sach kahu to thanks mere ko gift di uske liye bahot achha hai yrr uo to mera best gift 😄 💖 sach kahu to meko na chahiye tha pr jab aaya na to itni khushi 😭😭😭😘😘🥰 🌹 mai explain kaise karu yrr 🥺 ✨💫❤️
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">🎁</span>
+                            <span class="msg-heart">😭</span>
+                            <span class="msg-heart">🥺</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 12 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">😞</div>
+                <div class="card-decoration cd-2">💔</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🥺</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 aur ab chalte abhi ke din pr to sach kahu to idhar meko kuchh din se lag raha mai tere layak nhi disha 😄😄 💖 sacchhhhhhhhhhhhhiiiiiii aisa lagta jaise tumhe mere se achhe ladke mile to achha hai 🥺 sorrrrrrrrrrrrrrrrrrrryyyyyyyyyy yrr thora aisa bola aaj ke din maaf kar dena but ye pehele ka tha ab nhi 😞😞😞 ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">😞</span>
+                            <span class="msg-heart">🥺</span>
+                            <span class="msg-heart">💔</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 13 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">❤️</div>
+                <div class="card-decoration cd-2">😍</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">😘</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 hmm ab aate love pr meko na pata tum mere se kitne din tak love karogi pr jitna ki na mai na bhulne wala kabhi 😄 💖 aur mai nhi janta kaise pr uo mere dil me jo feelings tere liye bana kabhi na khatam hone wala ❤️😍 🌹 bahot achha hai 😘😘😘 ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">😍</span>
+                            <span class="msg-heart">😘</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 14 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">😭</div>
+                <div class="card-decoration cd-2">😔</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🥺</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 aur tumhara jo ye pyaar hai thanks yrr 😭😍 💖 aur han ab na hai bolne ka kuchh mai aaj kuchh bhi likh diya sorry dishu maaf kar do ok 😔😔 🌹 pls kuchh galat lage to bata dena aur meko na pata kya likhu to ye sab daal diya 😂😂😂 ✨💫❤️
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">😭</span>
+                            <span class="msg-heart">😔</span>
+                            <span class="msg-heart">😂</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 15 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">❤️</div>
+                <div class="card-decoration cd-2">🥹</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">😘</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 hmm aur ab last pichhla saal 2025 bahot achha raha tum mere life me aayi best year isse ban gya ❤️😘 💖 aur agar hum 2026 me aise rahe bas jaha ek dusre ko humesa samjhe care kare saath rahe to ye saal achha jayega ❤️❤️😅🥹 ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">😘</span>
+                            <span class="msg-heart">🥹</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 16 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🫴</div>
+                <div class="card-decoration cd-2">❤️</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🥺</div>
+                        <div class="envelope-icon">💌</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 to kya tum mere saath rahogi iss saal disha 🫴 💖 ............. 🌹 pls bata dena ❤️ ✨💫
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">🫴</span>
+                            <span class="msg-heart">🥺</span>
+                            <span class="msg-heart">💖</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 17 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">❤️</div>
+                <div class="card-decoration cd-2">💖</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">😍</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            💕 aur ab last yrr .................. 💖 i love youuuuuuuuuuuuuuuuu 😍 soooooooooooooooo sooooooooooooooooooooo sooooooooooo 😘 muchhhhhhhhhhhhhh disha ❤️❤️❤️❤️ ✨💫💝
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">💖</span>
+                            <span class="msg-heart">💕</span>
+                            <span class="msg-heart">😍</span>
+                            <span class="msg-heart">💝</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter 18 -->
+            <div class="envelope-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-decoration cd-1">🎆</div>
+                <div class="card-decoration cd-2">🎊</div>
+                <div class="card-decoration cd-3">💕</div>
+                <div class="card-decoration cd-4">✨</div>
+                
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="envelope-flap"></div>
+                        <div class="ribbon"></div>
+                        <div class="stamp">🎉</div>
+                        <div class="envelope-icon">💝</div>
+                        <div class="wax-seal">💖</div>
+                        <div class="click-hint">Click to open ✨</div>
+                    </div>
+                    
+                    <div class="card-back">
+                        <p class="message-text">
+                            🎆 Happy New Year 2026, Disha! 💖 As we step into this new year together, I want you to know that you are my greatest blessing. 🌟 May this year bring us closer, fill our hearts with endless love, and create beautiful memories that last forever. 💕 Thank you for being the light of my life. Here's to many more adventures, laughter, and love with you. ❤️ Cheers to us, my love! 🥂✨
+                        </p>
+                        <div class="message-decoration">
+                            <span class="msg-heart">🎉</span>
+                            <span class="msg-heart">💖</span>
+                            <span class="msg-heart">🎆</span>
+                            <span class="msg-heart">❤️</span>
+                            <span class="msg-heart">✨</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bottom">
+            <a href="reasons.html" class="nav-btn">
+                <span>Reasons I Love You</span>
+                <span class="btn-icon">🌸</span>
+            </a>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="assets/music/m5.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>

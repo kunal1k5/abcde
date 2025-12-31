@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Special Videos 🎥</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Quicksand:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* PAGE-SPECIFIC STYLES */
+        body.videos-page {
+            background: linear-gradient(180deg, #E6E6FA 0%, #FFB6C1 30%, #FFDAB9 60%, #D8BFD8 100%);
+            min-height: 100vh;
+        }
+        
+        .videos-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+            position: relative;
+            z-index: 20;
+        }
+        
+        /* Dreamy Header */
+        .videos-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .videos-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            background: linear-gradient(135deg, #FFB6C1, #E6E6FA, #FFDAB9);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 30px rgba(230, 230, 250, 0.8));
+            animation: titleWave 4s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes titleWave {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+        
+        .title-bubbles {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .bubble-icon {
+            font-size: 2rem;
+            animation: bubbleFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 5px 20px rgba(230, 230, 250, 0.7));
+        }
+        
+        .bubble-icon:nth-child(1) { animation-delay: 0s; }
+        .bubble-icon:nth-child(2) { animation-delay: 0.4s; }
+        .bubble-icon:nth-child(3) { animation-delay: 0.8s; }
+        .bubble-icon:nth-child(4) { animation-delay: 1.2s; }
+        .bubble-icon:nth-child(5) { animation-delay: 1.6s; }
+        
+        @keyframes bubbleFloat {
+            0%, 100% { 
+                transform: translateY(0) scale(1); 
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.2); 
+                opacity: 1;
+            }
+        }
+        
+        /* Video Grid */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 80px 60px;
+            margin-top: 60px;
+        }
+        
+        /* Glass Bubble Cards */
+        .video-bubble {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            animation: floatBubble 6s ease-in-out infinite;
+        }
+        
+        .video-bubble:nth-child(1) { animation-delay: 0s; }
+        .video-bubble:nth-child(2) { animation-delay: 1.5s; }
+        .video-bubble:nth-child(3) { animation-delay: 3s; }
+        .video-bubble:nth-child(4) { animation-delay: 4.5s; }
+        .video-bubble:nth-child(5) { animation-delay: 6s; }
+        .video-bubble:nth-child(6) { animation-delay: 7.5s; }
+        .video-bubble:nth-child(7) { animation-delay: 9s; }
+        
+        @keyframes floatBubble {
+            0%, 100% { 
+                transform: translateY(0) scale(1); 
+            }
+            50% { 
+                transform: translateY(-30px) scale(1.03); 
+            }
+        }
+        
+        .video-bubble:hover {
+            transform: scale(1.12) translateY(-20px) !important;
+            z-index: 100;
+        }
+        
+        /* Blob-shaped container */
+        .bubble-shape {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 1;
+            border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 60px rgba(230, 230, 250, 0.5),
+                        0 10px 30px rgba(255, 182, 193, 0.3),
+                        inset 0 0 50px rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            animation: morphBlob 10s ease-in-out infinite;
+            transition: all 0.5s ease;
+        }
+        
+        @keyframes morphBlob {
+            0%, 100% {
+                border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%;
+            }
+            25% {
+                border-radius: 52% 48% 45% 55% / 55% 52% 48% 45%;
+            }
+            50% {
+                border-radius: 48% 52% 55% 45% / 45% 55% 52% 48%;
+            }
+            75% {
+                border-radius: 55% 45% 48% 52% / 52% 48% 45% 55%;
+            }
+        }
+        
+        .video-bubble:hover .bubble-shape {
+            box-shadow: 0 30px 80px rgba(230, 230, 250, 0.7),
+                        0 20px 50px rgba(255, 182, 193, 0.5),
+                        0 0 60px rgba(255, 182, 193, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Glass shine effect */
+        .bubble-shape::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: glassShine 6s ease-in-out infinite;
+        }
+        
+        @keyframes glassShine {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(50%, 50%) rotate(180deg); }
+        }
+        
+        /* Glow Border */
+        .glow-border {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50% 50% 50% 50%;
+            background: linear-gradient(45deg,
+                rgba(255, 182, 193, 0.6),
+                rgba(230, 230, 250, 0.6),
+                rgba(255, 218, 185, 0.6)
+            );
+            filter: blur(15px);
+            opacity: 0.7;
+            z-index: -1;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        /* Video Player */
+        .video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+        
+        /* Video Placeholder */
+        .video-placeholder {
+            width: 70%;
+            height: 70%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            background: linear-gradient(135deg,
+                rgba(255, 182, 193, 0.4),
+                rgba(230, 230, 250, 0.4),
+                rgba(255, 218, 185, 0.4)
+            );
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-icon {
+            font-size: 4rem;
+            filter: drop-shadow(0 5px 20px rgba(255, 182, 193, 0.8));
+        }
+        
+        /* Play Button */
+        .play-button {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 40px rgba(255, 182, 193, 0.6);
+            animation: playPulse 2s ease-in-out infinite;
+            transition: all 0.4s ease;
+        }
+        
+        @keyframes playPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 10px 40px rgba(255, 182, 193, 0.6);
+            }
+            50% { 
+                transform: scale(1.1); 
+                box-shadow: 0 15px 60px rgba(255, 182, 193, 0.9);
+            }
+        }
+        
+        .video-bubble:hover .play-button {
+            transform: scale(1.2);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        /* Video Caption */
+        .video-caption {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 3px 20px rgba(255, 182, 193, 0.8);
+            text-align: center;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .caption-heart {
+            font-size: 1.2rem;
+            animation: heartPulse 1.5s ease-in-out infinite;
+        }
+        
+        /* Decorative Elements Around Bubbles */
+        .bubble-decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: decorationFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 3px 10px rgba(255, 182, 193, 0.6));
+        }
+        
+        .deco-1 { top: -20px; left: -30px; animation-delay: 0s; }
+        .deco-2 { top: -20px; right: -30px; animation-delay: 0.5s; }
+        .deco-3 { bottom: 20px; left: -30px; animation-delay: 1s; }
+        .deco-4 { bottom: 20px; right: -30px; animation-delay: 1.5s; }
+        
+        @keyframes decorationFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1); 
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-15px) rotate(180deg) scale(1.2); 
+                opacity: 1;
+            }
+        }
+        
+        /* Mini Hearts Around Bubbles */
+        .mini-hearts {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .mini-heart {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0;
+            animation: miniHeartFloat 4s ease-in-out infinite;
+        }
+        
+        .video-bubble:hover .mini-heart {
+            animation: miniHeartFloat 2s ease-in-out infinite;
+        }
+        
+        .mh-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .mh-2 { top: 10%; right: 10%; animation-delay: 0.3s; }
+        .mh-3 { bottom: 10%; left: 10%; animation-delay: 0.6s; }
+        .mh-4 { bottom: 10%; right: 10%; animation-delay: 0.9s; }
+        .mh-5 { top: 50%; left: 0%; animation-delay: 1.2s; }
+        .mh-6 { top: 50%; right: 0%; animation-delay: 1.5s; }
+        
+        @keyframes miniHeartFloat {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateY(0) scale(0.5); 
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: translateY(-20px) scale(1); 
+            }
+        }
+        
+        /* Navigation */
+        .nav-bottom {
+            text-align: center;
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 15px 40px rgba(230, 230, 250, 0.5);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 20px 60px rgba(230, 230, 250, 0.7);
+        }
+        
+        .btn-icon {
+            font-size: 1.5rem;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Floating Video Decorations */
+        .video-floats {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 7;
+        }
+        
+        .float-deco {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.4;
+            animation: videoFloat 20s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(230, 230, 250, 0.7));
+        }
+        
+        .vf-1 { top: 15%; left: 8%; animation-delay: 0s; }
+        .vf-2 { top: 25%; right: 10%; animation-delay: 3s; }
+        .vf-3 { bottom: 20%; left: 12%; animation-delay: 6s; }
+        .vf-4 { bottom: 30%; right: 15%; animation-delay: 9s; }
+        .vf-5 { top: 60%; left: 5%; animation-delay: 12s; }
+        .vf-6 { top: 70%; right: 8%; animation-delay: 15s; }
+        
+        @keyframes videoFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1); 
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translateY(-40px) rotate(180deg) scale(1.3); 
+                opacity: 0.7;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 100px;
+            }
+            
+            .videos-title {
+                font-size: 3.5rem;
+            }
+            
+            .bubble-shape {
+                max-width: 350px;
+            }
+            
+            .video-caption {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .videos-title {
+                font-size: 2.8rem;
+            }
+            
+            .bubble-shape {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="videos-page">
+    <!-- SVG Filters -->
+    <svg class="svg-filters" style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Multiple Layered Backgrounds -->
+    <div class="bg-layer bg-layer-1"></div>
+    <div class="bg-layer bg-layer-2"></div>
+    <div class="bg-layer bg-layer-3"></div>
+
+    <!-- Glowing Orbs -->
+    <div class="glow-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="floating-hearts"></div>
+
+    <!-- Sparkles -->
+    <div class="sparkles-container"></div>
+
+    <!-- Video Floating Decorations -->
+    <div class="video-floats">
+        <div class="float-deco vf-1">🎬</div>
+        <div class="float-deco vf-2">🌟</div>
+        <div class="float-deco vf-3">💫</div>
+        <div class="float-deco vf-4">✨</div>
+        <div class="float-deco vf-5">🎥</div>
+        <div class="float-deco vf-6">💕</div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control">
+        <div class="music-btn-glow"></div>
+        <button class="music-btn" id="musicToggle">
+            <span class="music-decoration">✨</span>
+            <span class="music-icon">🎵</span>
+            <span class="music-text">Music</span>
+        </button>
+    </div>
+
+    <!-- Corner Flourishes -->
+    <div class="corner-flourish tl">
+        <span class="flourish-element">🎬</span>
+        <div class="flourish-line"></div>
+        <span class="flourish-element">💖</span>
+    </div>
+    <div class="corner-flourish tr">
+        <span class="flourish-element">💕</span>
+        <div class="flourish-line"></div>
+        <span class="flourish-element">🌟</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="videos-container">
+        <!-- Videos Header -->
+        <div class="videos-header">
+            <h1 class="videos-title">
+                Our Special Videos 🎥
+            </h1>
+            <div class="title-bubbles">
+                <span class="bubble-icon">🎬</span>
+                <span class="bubble-icon">💖</span>
+                <span class="bubble-icon">🌟</span>
+                <span class="bubble-icon">✨</span>
+                <span class="bubble-icon">💕</span>
+            </div>
+        </div>
+
+        <!-- Videos Grid -->
+        <div class="videos-grid">
+            <!-- Video Bubble 1 -->
+            <div class="video-bubble">
+                <div class="bubble-decoration deco-1">🌸</div>
+                <div class="bubble-decoration deco-2">💫</div>
+                <div class="bubble-decoration deco-3">✨</div>
+                <div class="bubble-decoration deco-4">🌟</div>
+                
+                <div class="bubble-shape">
+                    <div class="glow-border"></div>
+                    <video class="video-player" controls>
+                        <source src="assets/videos/Image_To_Video_Conversion.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="mini-hearts">
+                        <span class="mini-heart mh-1">💕</span>
+                        <span class="mini-heart mh-2">💖</span>
+                        <span class="mini-heart mh-3">💗</span>
+                        <span class="mini-heart mh-4">💝</span>
+                        <span class="mini-heart mh-5">💓</span>
+                        <span class="mini-heart mh-6">💞</span>
+                    </div>
+                </div>
+                
+                <div class="video-caption">
+                    <span class="caption-heart">💕</span>
+                    <span>Our Beautiful Memories</span>
+                    <span class="caption-heart">💕</span>
+                </div>
+            </div>
+
+            <!-- Video Bubble 2 -->
+            <div class="video-bubble">
+                <div class="bubble-decoration deco-1">💐</div>
+                <div class="bubble-decoration deco-2">🎀</div>
+                <div class="bubble-decoration deco-3">🌺</div>
+                <div class="bubble-decoration deco-4">💖</div>
+                
+                <div class="bubble-shape">
+                    <div class="glow-border"></div>
+                    <video class="video-player" controls>
+                        <source src="assets/videos/v1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="mini-hearts">
+                        <span class="mini-heart mh-1">💕</span>
+                        <span class="mini-heart mh-2">💖</span>
+                        <span class="mini-heart mh-3">💗</span>
+                        <span class="mini-heart mh-4">💝</span>
+                        <span class="mini-heart mh-5">💓</span>
+                        <span class="mini-heart mh-6">💞</span>
+                    </div>
+                </div>
+                
+                <div class="video-caption">
+                    <span class="caption-heart">💖</span>
+                    <span>Special Moment 1</span>
+                    <span class="caption-heart">💖</span>
+                </div>
+            </div>
+
+            <!-- Video Bubble 3 -->
+            <div class="video-bubble">
+                <div class="bubble-decoration deco-1">🌹</div>
+                <div class="bubble-decoration deco-2">💫</div>
+                <div class="bubble-decoration deco-3">🌸</div>
+                <div class="bubble-decoration deco-4">✨</div>
+                
+                <div class="bubble-shape">
+                    <div class="glow-border"></div>
+                    <video class="video-player" controls>
+                        <source src="assets/videos/v2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="mini-hearts">
+                        <span class="mini-heart mh-1">💕</span>
+                        <span class="mini-heart mh-2">💖</span>
+                        <span class="mini-heart mh-3">💗</span>
+                        <span class="mini-heart mh-4">💝</span>
+                        <span class="mini-heart mh-5">💓</span>
+                        <span class="mini-heart mh-6">💞</span>
+                    </div>
+                </div>
+                
+                <div class="video-caption">
+                    <span class="caption-heart">💗</span>
+                    <span>Special Moment 2</span>
+                    <span class="caption-heart">💗</span>
+                </div>
+            </div>
+
+            <!-- Video Bubble 4 -->
+            <div class="video-bubble">
+                <div class="bubble-decoration deco-1">🦋</div>
+                <div class="bubble-decoration deco-2">🌟</div>
+                <div class="bubble-decoration deco-3">💕</div>
+                <div class="bubble-decoration deco-4">🌺</div>
+                
+                <div class="bubble-shape">
+                    <div class="glow-border"></div>
+                    <video class="video-player" controls>
+                        <source src="assets/videos/v3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="mini-hearts">
+                        <span class="mini-heart mh-1">💕</span>
+                        <span class="mini-heart mh-2">💖</span>
+                        <span class="mini-heart mh-3">💗</span>
+                        <span class="mini-heart mh-4">💝</span>
+                        <span class="mini-heart mh-5">💓</span>
+                        <span class="mini-heart mh-6">💞</span>
+                    </div>
+                </div>
+                
+                <div class="video-caption">
+                    <span class="caption-heart">💝</span>
+                    <span>Special Moment 3</span>
+                    <span class="caption-heart">💝</span>
+                </div>
+            </div>
+
+            <!-- Video Bubble 5 -->
+            <div class="video-bubble">
+                <div class="bubble-decoration deco-1">🌸</div>
+                <div class="bubble-decoration deco-2">💫</div>
+                <div class="bubble-decoration deco-3">✨</div>
+                <div class="bubble-decoration deco-4">🌟</div>
+                
+                <div class="bubble-shape">
+                    <div class="glow-border"></div>
+                    <video class="video-player" controls>
+                        <source src="assets/videos/v4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="mini-hearts">
+                        <span class="mini-heart mh-1">💕</span>
+                        <span class="mini-heart mh-2">💖</span>
+                        <span class="mini-heart mh-3">💗</span>
+                        <span class="mini-heart mh-4">💝</span>
+                        <span class="mini-heart mh-5">💓</span>
+                        <span class="mini-heart mh-6">💞</span>
+                    </div>
+                </div>
+                
+                <div class="video-caption">
+                    <span class="caption-heart">💓</span>
+                    <span>Special Moment 4</span>
+                    <span class="caption-heart">💓</span>
+                </div>
+            </div>
+
+            <!-- Video Bubble 6 -->
+            <div class="video-bubble">
+                <div class="bubble-decoration deco-1">💐</div>
+                <div class="bubble-decoration deco-2">🎀</div>
+                <div class="bubble-decoration deco-3">🌺</div>
+                <div class="bubble-decoration deco-4">💖</div>
+                
+                <div class="bubble-shape">
+                    <div class="glow-border"></div>
+                    <video class="video-player" controls>
+                        <source src="assets/videos/v5.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="mini-hearts">
+                        <span class="mini-heart mh-1">💕</span>
+                        <span class="mini-heart mh-2">💖</span>
+                        <span class="mini-heart mh-3">💗</span>
+                        <span class="mini-heart mh-4">💝</span>
+                        <span class="mini-heart mh-5">💓</span>
+                        <span class="mini-heart mh-6">💞</span>
+                    </div>
+                </div>
+                
+                <div class="video-caption">
+                    <span class="caption-heart">💞</span>
+                    <span>Special Moment 5</span>
+                    <span class="caption-heart">💞</span>
+                </div>
+            </div>
+
+            <!-- Video Bubble 7 -->
+            <div class="video-bubble">
+                <div class="bubble-decoration deco-1">🌹</div>
+                <div class="bubble-decoration deco-2">💫</div>
+                <div class="bubble-decoration deco-3">🌸</div>
+                <div class="bubble-decoration deco-4">✨</div>
+                
+                <div class="bubble-shape">
+                    <div class="glow-border"></div>
+                    <video class="video-player" controls>
+                        <source src="assets/videos/v6.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="mini-hearts">
+                        <span class="mini-heart mh-1">💕</span>
+                        <span class="mini-heart mh-2">💖</span>
+                        <span class="mini-heart mh-3">💗</span>
+                        <span class="mini-heart mh-4">💝</span>
+                        <span class="mini-heart mh-5">💓</span>
+                        <span class="mini-heart mh-6">💞</span>
+                    </div>
+                </div>
+                
+                <div class="video-caption">
+                    <span class="caption-heart">💕</span>
+                    <span>Special Moment 6</span>
+                    <span class="caption-heart">💕</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bottom">
+            <a href="messages.html" class="nav-btn">
+                <span>Read Love Letters</span>
+                <span class="btn-icon">💌</span>
+            </a>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="assets/music/m4.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>

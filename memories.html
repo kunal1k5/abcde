@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Beautiful Memories 💕</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Quicksand:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* PAGE-SPECIFIC STYLES */
+        body.memories-page {
+            background: linear-gradient(135deg, #FFF5EE 0%, #FFE4E1 25%, #FFB6C1 50%, #E6E6FA 75%, #F0E6FA 100%);
+            min-height: 100vh;
+        }
+        
+        .memories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+            position: relative;
+            z-index: 20;
+        }
+        
+        /* Scrapbook Header */
+        .scrapbook-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .scrapbook-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB, #E6E6FA);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 30px rgba(255, 182, 193, 0.8));
+            animation: titleFloat 4s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header-stickers {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+        
+        .sticker {
+            display: inline-block;
+            animation: stickerBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 182, 193, 0.6));
+        }
+        
+        .sticker:nth-child(1) { animation-delay: 0s; }
+        .sticker:nth-child(2) { animation-delay: 0.3s; }
+        .sticker:nth-child(3) { animation-delay: 0.6s; }
+        .sticker:nth-child(4) { animation-delay: 0.9s; }
+        .sticker:nth-child(5) { animation-delay: 1.2s; }
+        
+        @keyframes stickerBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            25% { transform: translateY(-15px) rotate(10deg) scale(1.1); }
+            75% { transform: translateY(-5px) rotate(-10deg) scale(1.05); }
+        }
+        
+        /* Masonry Gallery */
+        .memories-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 60px 40px;
+            margin-top: 60px;
+        }
+        
+        /* Polaroid Photo Cards */
+        .polaroid-card {
+            position: relative;
+            background: white;
+            padding: 20px 20px 60px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2),
+                        0 5px 15px rgba(255, 182, 193, 0.3);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            transform-origin: center;
+        }
+        
+        .polaroid-card:nth-child(odd) {
+            transform: rotate(-3deg);
+        }
+        
+        .polaroid-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .polaroid-card:nth-child(3n) {
+            transform: rotate(-5deg);
+        }
+        
+        .polaroid-card:hover {
+            transform: rotate(0deg) scale(1.1) translateY(-20px) !important;
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.5),
+                        0 10px 30px rgba(230, 230, 250, 0.4),
+                        0 0 40px rgba(255, 182, 193, 0.6);
+            z-index: 100;
+        }
+        
+        /* Decorative Tape */
+        .tape {
+            position: absolute;
+            top: -15px;
+            width: 80px;
+            height: 30px;
+            background: rgba(255, 218, 185, 0.6);
+            border: 1px dashed rgba(255, 182, 193, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .tape-left {
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+        
+        .tape-right {
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .tape::after {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+        }
+        
+        /* Photo Container */
+        .photo-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #FFE4E1, #FFF5EE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 182, 193, 0.3),
+                rgba(230, 230, 250, 0.3),
+                rgba(255, 218, 185, 0.3)
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: photoShine 3s ease-in-out infinite;
+        }
+        
+        @keyframes photoShine {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(50%, 50%) rotate(180deg); }
+        }
+        
+        /* Caption */
+        .photo-caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: #333;
+            text-align: center;
+            margin-top: 15px;
+            padding: 0 10px;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .photo-caption::before,
+        .photo-caption::after {
+            content: '💕';
+            position: absolute;
+            font-size: 1rem;
+            animation: heartPulse 1.5s ease-in-out infinite;
+        }
+        
+        .photo-caption::before {
+            left: 0;
+        }
+        
+        .photo-caption::after {
+            right: 0;
+        }
+        
+        /* Decorative Stickers on Cards */
+        .card-sticker {
+            position: absolute;
+            font-size: 1.8rem;
+            z-index: 15;
+            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
+            animation: stickerWiggle 3s ease-in-out infinite;
+        }
+        
+        @keyframes stickerWiggle {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.1); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+        }
+        
+        .sticker-tl {
+            top: 40px;
+            left: 10px;
+            animation-delay: 0s;
+        }
+        
+        .sticker-tr {
+            top: 40px;
+            right: 10px;
+            animation-delay: 0.5s;
+        }
+        
+        .sticker-bl {
+            bottom: 70px;
+            left: 10px;
+            animation-delay: 1s;
+        }
+        
+        .sticker-br {
+            bottom: 70px;
+            right: 10px;
+            animation-delay: 1.5s;
+        }
+        
+        /* Doodles */
+        .doodle {
+            position: absolute;
+            z-index: 5;
+        }
+        
+        .doodle-heart {
+            top: -10px;
+            left: -10px;
+            font-size: 2rem;
+            color: rgba(255, 182, 193, 0.7);
+            animation: doodleFloat 4s ease-in-out infinite;
+        }
+        
+        .doodle-star {
+            bottom: 10px;
+            right: -10px;
+            font-size: 1.5rem;
+            color: rgba(230, 230, 250, 0.7);
+            animation: doodleFloat 3s ease-in-out infinite reverse;
+        }
+        
+        @keyframes doodleFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(5px, -5px) rotate(15deg); }
+        }
+        
+        /* Navigation Button */
+        .nav-bottom {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 15px 40px rgba(255, 182, 193, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.6);
+        }
+        
+        .btn-icon {
+            font-size: 1.5rem;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Floating Decorative Elements */
+        .scrapbook-stickers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 8;
+        }
+        
+        .floating-sticker {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.4;
+            animation: floatSticker 15s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 182, 193, 0.6));
+        }
+        
+        .fs-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .fs-2 { top: 20%; right: 10%; animation-delay: 2s; }
+        .fs-3 { bottom: 15%; left: 8%; animation-delay: 4s; }
+        .fs-4 { bottom: 25%; right: 12%; animation-delay: 6s; }
+        .fs-5 { top: 60%; left: 15%; animation-delay: 8s; }
+        .fs-6 { top: 40%; right: 8%; animation-delay: 10s; }
+        
+        @keyframes floatSticker {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1); 
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg) scale(1.2); 
+                opacity: 0.7;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .memories-gallery {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .scrapbook-title {
+                font-size: 3.5rem;
+            }
+            
+            .polaroid-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body class="memories-page">
+    <!-- SVG Filters -->
+    <svg class="svg-filters" style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Multiple Layered Backgrounds -->
+    <div class="bg-layer bg-layer-1"></div>
+    <div class="bg-layer bg-layer-2"></div>
+    <div class="bg-layer bg-layer-3"></div>
+
+    <!-- Glowing Orbs -->
+    <div class="glow-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="floating-hearts"></div>
+
+    <!-- Sparkles -->
+    <div class="sparkles-container"></div>
+
+    <!-- Scrapbook Floating Stickers -->
+    <div class="scrapbook-stickers">
+        <div class="floating-sticker fs-1">📸</div>
+        <div class="floating-sticker fs-2">🎀</div>
+        <div class="floating-sticker fs-3">💝</div>
+        <div class="floating-sticker fs-4">🌸</div>
+        <div class="floating-sticker fs-5">✨</div>
+        <div class="floating-sticker fs-6">💕</div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control">
+        <div class="music-btn-glow"></div>
+        <button class="music-btn" id="musicToggle">
+            <span class="music-decoration">✨</span>
+            <span class="music-icon">🎵</span>
+            <span class="music-text">Music</span>
+        </button>
+    </div>
+
+    <!-- Corner Flourishes -->
+    <div class="corner-flourish tl">
+        <span class="flourish-element">🌺</span>
+        <div class="flourish-line"></div>
+        <span class="flourish-element">💖</span>
+    </div>
+    <div class="corner-flourish tr">
+        <span class="flourish-element">💕</span>
+        <div class="flourish-line"></div>
+        <span class="flourish-element">🌸</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="memories-container">
+        <!-- Scrapbook Header -->
+        <div class="scrapbook-header">
+            <h1 class="scrapbook-title">
+                Our Beautiful Memories 💕
+            </h1>
+            <div class="header-stickers">
+                <span class="sticker">📸</span>
+                <span class="sticker">💖</span>
+                <span class="sticker">🌸</span>
+                <span class="sticker">✨</span>
+                <span class="sticker">🎀</span>
+            </div>
+        </div>
+
+        <!-- Memories Gallery -->
+        <div class="memories-gallery">
+            <!-- Photo Card 1 - d1 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="doodle doodle-heart">💕</div>
+                <div class="card-sticker sticker-tr">🌸</div>
+                <div class="photo-container">
+                    <img src="assets/images/d1.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Beautiful Memory</p>
+            </div>
+
+            <!-- Photo Card 2 - a2 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-tl">💖</div>
+                <div class="card-sticker sticker-br">✨</div>
+                <div class="photo-container">
+                    <img src="assets/images/a2.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Sweet Moment</p>
+                <div class="doodle doodle-star">⭐</div>
+            </div>
+
+            <!-- Photo Card 3 - d2 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tr">🎀</div>
+                <div class="photo-container">
+                    <img src="assets/images/d2.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Together Forever</p>
+                <div class="doodle doodle-heart">💝</div>
+            </div>
+
+            <!-- Photo Card 4 - a3 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-bl">🌺</div>
+                <div class="card-sticker sticker-tr">💫</div>
+                <div class="photo-container">
+                    <img src="assets/images/a3.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Precious Times</p>
+            </div>
+
+            <!-- Photo Card 5 - d3 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tl">🦋</div>
+                <div class="photo-container">
+                    <img src="assets/images/d3.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Lovely Day</p>
+                <div class="doodle doodle-star">✨</div>
+            </div>
+
+            <!-- Photo Card 6 - a4 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-bl">💐</div>
+                <div class="card-sticker sticker-tr">🌸</div>
+                <div class="photo-container">
+                    <img src="assets/images/a4.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Unforgettable</p>
+                <div class="doodle doodle-heart">💖</div>
+            </div>
+
+            <!-- Photo Card 7 - d4 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tr">🎈</div>
+                <div class="photo-container">
+                    <img src="assets/images/d4.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Happy Moments</p>
+            </div>
+
+            <!-- Photo Card 8 - a5 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-tl">💕</div>
+                <div class="card-sticker sticker-br">🌟</div>
+                <div class="photo-container">
+                    <img src="assets/images/a5.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">With You Always</p>
+                <div class="doodle doodle-heart">💝</div>
+            </div>
+
+            <!-- Photo Card 9 - d5 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tr">🌹</div>
+                <div class="photo-container">
+                    <img src="assets/images/d5.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Beautiful Us</p>
+            </div>
+
+            <!-- Photo Card 10 - a6 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-bl">💖</div>
+                <div class="photo-container">
+                    <img src="assets/images/a6.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Pure Joy</p>
+                <div class="doodle doodle-star">⭐</div>
+            </div>
+
+            <!-- Photo Card 11 - d6 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tl">✨</div>
+                <div class="card-sticker sticker-br">🎀</div>
+                <div class="photo-container">
+                    <img src="assets/images/d6.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Cherished Memory</p>
+                <div class="doodle doodle-heart">💕</div>
+            </div>
+
+            <!-- Photo Card 12 - a7 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-tr">🌺</div>
+                <div class="photo-container">
+                    <img src="assets/images/a7.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Perfect Day</p>
+            </div>
+
+            <!-- Photo Card 13 - d7 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-bl">💫</div>
+                <div class="photo-container">
+                    <img src="assets/images/d7.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Love & Laughter</p>
+                <div class="doodle doodle-star">✨</div>
+            </div>
+
+            <!-- Photo Card 14 - a8 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-tl">🦋</div>
+                <div class="card-sticker sticker-br">💖</div>
+                <div class="photo-container">
+                    <img src="assets/images/a8.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Magical Times</p>
+                <div class="doodle doodle-heart">💝</div>
+            </div>
+
+            <!-- Photo Card 15 - d8 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tr">🌸</div>
+                <div class="photo-container">
+                    <img src="assets/images/d8.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Best Friends</p>
+            </div>
+
+            <!-- Photo Card 16 - a9 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-bl">🎈</div>
+                <div class="photo-container">
+                    <img src="assets/images/a9.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Adventure Time</p>
+                <div class="doodle doodle-star">⭐</div>
+            </div>
+
+            <!-- Photo Card 17 - d9 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tl">💕</div>
+                <div class="photo-container">
+                    <img src="assets/images/d9.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Heartfelt Moments</p>
+                <div class="doodle doodle-heart">💖</div>
+            </div>
+
+            <!-- Photo Card 18 - a10 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-tr">🌟</div>
+                <div class="card-sticker sticker-bl">💐</div>
+                <div class="photo-container">
+                    <img src="assets/images/a10.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Special Days</p>
+            </div>
+
+            <!-- Photo Card 19 - d10 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tr">🎀</div>
+                <div class="photo-container">
+                    <img src="assets/images/d10.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Dream Come True</p>
+                <div class="doodle doodle-star">✨</div>
+            </div>
+
+            <!-- Photo Card 20 - a11 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-bl">🌺</div>
+                <div class="photo-container">
+                    <img src="assets/images/a11.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Beautiful Journey</p>
+                <div class="doodle doodle-heart">💝</div>
+            </div>
+
+            <!-- Photo Card 21 - d11 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tl">💫</div>
+                <div class="card-sticker sticker-br">🦋</div>
+                <div class="photo-container">
+                    <img src="assets/images/d11.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Endless Love</p>
+            </div>
+
+            <!-- Photo Card 22 - a12 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-tr">💖</div>
+                <div class="photo-container">
+                    <img src="assets/images/a12.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Forever Together</p>
+                <div class="doodle doodle-star">⭐</div>
+            </div>
+
+            <!-- Photo Card 23 - d12 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-bl">🌸</div>
+                <div class="photo-container">
+                    <img src="assets/images/d12.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Precious Us</p>
+                <div class="doodle doodle-heart">💕</div>
+            </div>
+
+            <!-- Photo Card 24 - a13 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-tl">✨</div>
+                <div class="card-sticker sticker-br">🎈</div>
+                <div class="photo-container">
+                    <img src="assets/images/a13.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Joy & Happiness</p>
+            </div>
+
+            <!-- Photo Card 25 - d13 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tr">💐</div>
+                <div class="photo-container">
+                    <img src="assets/images/d13.jpg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Our Story</p>
+                <div class="doodle doodle-star">✨</div>
+            </div>
+
+            <!-- Photo Card 26 - a14 -->
+            <div class="polaroid-card">
+                <div class="tape tape-right"></div>
+                <div class="card-sticker sticker-bl">🌟</div>
+                <div class="card-sticker sticker-tl">💖</div>
+                <div class="photo-container">
+                    <img src="assets/images/a14.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Wonderful Memories</p>
+                <div class="doodle doodle-heart">💝</div>
+            </div>
+
+            <!-- Photo Card 27 - a15 -->
+            <div class="polaroid-card">
+                <div class="tape tape-left"></div>
+                <div class="card-sticker sticker-tr">🎀</div>
+                <div class="photo-container">
+                    <img src="assets/images/a15.jpeg" alt="Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p class="photo-caption">Always & Forever</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bottom">
+            <a href="videos.html" class="nav-btn">
+                <span>Watch Our Videos</span>
+                <span class="btn-icon">🎥</span>
+            </a>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="assets/music/m3.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>

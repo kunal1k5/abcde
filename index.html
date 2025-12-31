@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love 💕 - A Fairy Tale Beginning</title>
+    
+    <!-- Google Fonts - Decorative -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;600;700&family=Quicksand:wght@300;400;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-welcome">
+    
+    <!-- SVG Filters for Glow Effects -->
+    <svg class="svg-filters" style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+            <filter id="neon-glow">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+    </svg>
+    
+    <!-- Multiple Layered Backgrounds -->
+    <div class="bg-layer bg-layer-1"></div>
+    <div class="bg-layer bg-layer-2"></div>
+    <div class="bg-layer bg-layer-3"></div>
+    
+    <!-- Animated Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+    
+    <!-- Glowing Orbs Background -->
+    <div class="glow-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+    
+    <!-- Floating Decorative Elements -->
+    <div class="floating-hearts"></div>
+    <div class="sparkles-container"></div>
+    <div class="floating-flowers">
+        <span class="flower f-1">🌸</span>
+        <span class="flower f-2">🌺</span>
+        <span class="flower f-3">🌷</span>
+        <span class="flower f-4">🌹</span>
+        <span class="flower f-5">🌼</span>
+        <span class="flower f-6">🏵️</span>
+    </div>
+    
+    <!-- Music Control - Decorated -->
+    <div class="music-control decorated-btn">
+        <div class="music-btn-glow"></div>
+        <button id="musicToggle" class="music-btn">
+            <span class="music-decoration">✨</span>
+            <span class="music-icon">💖</span>
+            <span class="music-text">Music</span>
+            <span class="music-decoration">✨</span>
+        </button>
+    </div>
+    
+    <!-- Decorative Corner Flourishes -->
+    <div class="corner-flourish tl">
+        <div class="flourish-element">💕</div>
+        <div class="flourish-element">✨</div>
+        <div class="flourish-line"></div>
+    </div>
+    <div class="corner-flourish tr">
+        <div class="flourish-element">💖</div>
+        <div class="flourish-element">🌟</div>
+        <div class="flourish-line"></div>
+    </div>
+    <div class="corner-flourish bl">
+        <div class="flourish-element">🌸</div>
+        <div class="flourish-element">💗</div>
+        <div class="flourish-line"></div>
+    </div>
+    <div class="corner-flourish br">
+        <div class="flourish-element">💝</div>
+        <div class="flourish-element">✨</div>
+        <div class="flourish-line"></div>
+    </div>
+    
+    <!-- Main Welcome Section -->
+    <section class="welcome-hero">
+        <!-- Decorative Ornamental Frame -->
+        <div class="ornamental-frame">
+            <div class="frame-corner fc-tl">
+                <svg viewBox="0 0 100 100" width="100" height="100">
+                    <path d="M 10 10 Q 10 50 50 50 Q 10 50 10 90" stroke="#FFB6C1" stroke-width="3" fill="none" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="frame-corner fc-tr">
+                <svg viewBox="0 0 100 100" width="100" height="100">
+                    <path d="M 90 10 Q 90 50 50 50 Q 90 50 90 90" stroke="#FFB6C1" stroke-width="3" fill="none" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="frame-corner fc-bl">
+                <svg viewBox="0 0 100 100" width="100" height="100">
+                    <path d="M 10 90 Q 10 50 50 50 Q 10 50 10 10" stroke="#FFB6C1" stroke-width="3" fill="none" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="frame-corner fc-br">
+                <svg viewBox="0 0 100 100" width="100" height="100">
+                    <path d="M 90 90 Q 90 50 50 50 Q 90 50 90 10" stroke="#FFB6C1" stroke-width="3" fill="none" opacity="0.6"/>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Glass Morphism Content Card -->
+        <div class="welcome-content glass-card">
+            <!-- Top Decoration Ribbon -->
+            <div class="decoration-ribbon top">
+                <span class="ribbon-heart">💕</span>
+                <span class="ribbon-sparkle">✨</span>
+                <span class="ribbon-flower">🌸</span>
+                <span class="ribbon-sparkle">✨</span>
+                <span class="ribbon-heart">💕</span>
+            </div>
+            
+            <!-- Animated Title with Individual Letters -->
+            <h1 class="main-title fairy-tale-title">
+                <span class="title-decoration-top">
+                    <span class="deco-heart">💖</span>
+                    <span class="deco-line"></span>
+                    <span class="deco-star">⭐</span>
+                    <span class="deco-line"></span>
+                    <span class="deco-heart">💖</span>
+                </span>
+                
+                <div class="title-words" style="
+                    text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                                 0 0 40px rgba(255, 182, 193, 1),
+                                 0 5px 30px rgba(0, 0, 0, 0.5),
+                                 0 0 60px rgba(230, 230, 250, 0.8);
+                    font-weight: 800;
+                    letter-spacing: 3px;
+                    color: #8B008B;
+                    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+                ">
+                    <span class="title-word word-1">F</span><span class="title-word word-2">o</span><span class="title-word word-3">r</span>
+                    <span class="title-space"></span>
+                    <span class="title-word word-4">M</span><span class="title-word word-5">y</span>
+                    <span class="title-space"></span>
+                    <span class="title-word word-6">L</span><span class="title-word word-7">o</span><span class="title-word word-8">v</span><span class="title-word word-9">e</span>
+                    <span class="title-heart animated-heart">❤️</span>
+                </div>
+                
+                <span class="title-decoration-bottom">
+                    <span class="deco-flower">🌸</span>
+                    <span class="deco-wave"></span>
+                    <span class="deco-flower">🌸</span>
+                </span>
+            </h1>
+            
+            <!-- Decorative Separator -->
+            <div class="luxury-separator">
+                <span class="sep-ornament left">✨</span>
+                <span class="sep-heart main-heart">💕</span>
+                <span class="sep-line"></span>
+                <span class="sep-flower">🌺</span>
+                <span class="sep-line"></span>
+                <span class="sep-heart main-heart">💕</span>
+                <span class="sep-ornament right">✨</span>
+            </div>
+            
+            <!-- Subtitle with Decoration (Moved Up) -->
+            <p class="subtitle romantic-text" style="margin-top: -15px; margin-bottom: 30px; 
+                text-shadow: 0 0 15px rgba(255, 255, 255, 1),
+                             0 3px 20px rgba(255, 182, 193, 1),
+                             0 5px 25px rgba(0, 0, 0, 0.6);
+                font-weight: 700;
+                font-size: 1.4rem;
+                color: #6B1F6B;
+                -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.6);">
+                <span class="subtitle-star">🌟</span>
+                <span class="subtitle-text">A special gift from my heart to yours</span>
+                <span class="subtitle-star">🌟</span>
+            </p>
+            
+            <div class="subtitle-flourish" style="margin-bottom: 30px;">
+                <span class="flourish-dot"></span>
+                <span class="flourish-dot"></span>
+                <span class="flourish-dot"></span>
+            </div>
+            
+            <!-- Decorative Image with Reveal Cover -->
+            <div class="decorative-image-container" style="margin: 40px 0; position: relative; z-index: 15;">
+                <!-- Image Frame -->
+                <div class="image-frame" style="
+                    position: relative;
+                    width: 350px;
+                    height: 350px;
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    padding: 15px;
+                    background: linear-gradient(135deg, rgba(255, 182, 193, 0.4), rgba(230, 230, 250, 0.4));
+                    box-shadow: 0 20px 60px rgba(255, 182, 193, 0.5),
+                                0 0 40px rgba(230, 230, 250, 0.4),
+                                inset 0 0 30px rgba(255, 255, 255, 0.3);
+                    animation: imageFloat 4s ease-in-out infinite;
+                ">
+                    <!-- Decorative Sparkles Around Frame -->
+                    <div style="position: absolute; top: -10px; left: 20%; font-size: 1.5rem; animation: sparkleRotate 3s linear infinite;">✨</div>
+                    <div style="position: absolute; top: 10%; right: -5px; font-size: 1.8rem; animation: sparkleRotate 3s linear infinite reverse;">💖</div>
+                    <div style="position: absolute; bottom: 15%; left: -10px; font-size: 1.6rem; animation: sparkleRotate 3s linear infinite;">🌸</div>
+                    <div style="position: absolute; bottom: -5px; right: 25%; font-size: 1.5rem; animation: sparkleRotate 3s linear infinite reverse;">✨</div>
+                    
+                    <!-- Inner Glow Ring -->
+                    <div style="
+                        position: absolute;
+                        top: 10px;
+                        left: 10px;
+                        right: 10px;
+                        bottom: 10px;
+                        border-radius: 50%;
+                        border: 3px solid rgba(255, 255, 255, 0.5);
+                        box-shadow: 0 0 30px rgba(255, 182, 193, 0.6);
+                        animation: glowPulse 3s ease-in-out infinite;
+                    "></div>
+                    
+                    <!-- Image Container -->
+                    <div style="
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        background: linear-gradient(135deg, rgba(255, 192, 203, 0.3), rgba(230, 230, 250, 0.3));
+                        box-shadow: inset 0 0 40px rgba(255, 182, 193, 0.3);
+                    ">
+                        <img src="assets/images/a1.jpeg" alt="Special Memory" style="
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        ">
+                        
+                        <!-- Reveal Cover Overlay -->
+                        <div id="revealCover" onclick="revealImage()" style="
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: linear-gradient(135deg, 
+                                rgba(255, 182, 193, 0.95), 
+                                rgba(230, 230, 250, 0.95),
+                                rgba(255, 218, 185, 0.95));
+                            backdrop-filter: blur(10px);
+                            border-radius: 50%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            z-index: 10;
+                        ">
+                            <!-- Cover Heart Decoration -->
+                            <div style="
+                                font-size: 4rem;
+                                margin-bottom: 15px;
+                                animation: heartPulse 1.5s ease-in-out infinite;
+                                filter: drop-shadow(0 5px 20px rgba(255, 255, 255, 0.8));
+                            ">💝</div>
+                            
+                            <!-- Cover Text -->
+                            <div style="
+                                font-family: 'Dancing Script', cursive;
+                                font-size: 2rem;
+                                color: #4B0082;
+                                text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                                             0 3px 30px rgba(255, 255, 255, 1),
+                                             0 5px 40px rgba(255, 255, 255, 0.8);
+                                font-weight: 700;
+                                -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+                            ">Tap to Reveal 💕</div>
+                            
+                            <!-- Cover Mini Sparkles -->
+                            <div style="margin-top: 15px; display: flex; gap: 10px;">
+                                <span style="font-size: 1.2rem; animation: emojiPulse 2s ease-in-out infinite;">✨</span>
+                                <span style="font-size: 1.2rem; animation: emojiPulse 2s ease-in-out infinite; animation-delay: 0.3s;">💫</span>
+                                <span style="font-size: 1.2rem; animation: emojiPulse 2s ease-in-out infinite; animation-delay: 0.6s;">✨</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Luxury Button Container -->
+            <div class="button-wrapper">
+                <div class="button-glow-ring ring-1"></div>
+                <div class="button-glow-ring ring-2"></div>
+                <div class="button-glow-ring ring-3"></div>
+                
+                <a href="memories.html" class="heart-button luxury-btn">
+                    <span class="btn-bg-glow"></span>
+                    <span class="btn-decoration-left">
+                        <span class="deco-sparkle">✨</span>
+                        <span class="deco-mini-heart">💕</span>
+                    </span>
+                    
+                    <span class="btn-heart pulse-heart">💖</span>
+                    <span class="btn-text" style="
+                        text-shadow: 0 0 15px rgba(255, 255, 255, 1),
+                                     0 3px 20px rgba(255, 255, 255, 1),
+                                     0 5px 30px rgba(0, 0, 0, 0.6);
+                        font-weight: 700;
+                        font-size: 1.4rem;
+                        color: #4B0082;
+                        -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.7);
+                    ">Open My Heart</span>
+                    <span class="btn-heart pulse-heart">💖</span>
+                    
+                    <span class="btn-decoration-right">
+                        <span class="deco-mini-heart">💕</span>
+                        <span class="deco-sparkle">✨</span>
+                    </span>
+                    
+                    <span class="btn-shine"></span>
+                </a>
+            </div>
+            
+            <!-- Bottom Decoration Ribbon -->
+            <div class="decoration-ribbon bottom">
+                <span class="ribbon-flower">🌷</span>
+                <span class="ribbon-sparkle">✨</span>
+                <span class="ribbon-heart">💗</span>
+                <span class="ribbon-sparkle">✨</span>
+                <span class="ribbon-flower">🌷</span>
+            </div>
+        </div>
+        
+        <!-- Floating Emojis with Complex Paths -->
+        <div class="floating-emojis-layer">
+            <span class="emoji float-1">💕</span>
+            <span class="emoji float-2">💖</span>
+            <span class="emoji float-3">✨</span>
+            <span class="emoji float-4">🥰</span>
+            <span class="emoji float-5">💗</span>
+            <span class="emoji float-6">🌸</span>
+            <span class="emoji float-7">💝</span>
+            <span class="emoji float-8">🌟</span>
+            <span class="emoji float-9">🌺</span>
+            <span class="emoji float-10">💫</span>
+            <span class="emoji float-11">🌷</span>
+            <span class="emoji float-12">✨</span>
+            <span class="emoji float-13">💕</span>
+            <span class="emoji float-14">🌼</span>
+            <span class="emoji float-15">💖</span>
+        </div>
+        
+        <!-- Rising Heart Particles -->
+        <div class="heart-particles-layer">
+            <div class="particle particle-1">💕</div>
+            <div class="particle particle-2">💖</div>
+            <div class="particle particle-3">💗</div>
+            <div class="particle particle-4">💓</div>
+            <div class="particle particle-5">💝</div>
+            <div class="particle particle-6">💘</div>
+            <div class="particle particle-7">💕</div>
+            <div class="particle particle-8">💖</div>
+            <div class="particle particle-9">💗</div>
+            <div class="particle particle-10">💓</div>
+        </div>
+        
+        <!-- Decorative Clouds -->
+        <div class="dreamy-clouds">
+            <div class="cloud cloud-1">☁️</div>
+            <div class="cloud cloud-2">☁️</div>
+            <div class="cloud cloud-3">☁️</div>
+            <div class="cloud cloud-4">☁️</div>
+        </div>
+        
+        <!-- Twinkling Stars -->
+        <div class="twinkling-stars">
+            <span class="star star-1">⭐</span>
+            <span class="star star-2">✨</span>
+            <span class="star star-3">🌟</span>
+            <span class="star star-4">💫</span>
+            <span class="star star-5">⭐</span>
+            <span class="star star-6">✨</span>
+        </div>
+    </section>
+    
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="assets/music/romantic-music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="script.js"></script>
+    <script>
+        // Image Reveal Animation
+        function revealImage() {
+            const cover = document.getElementById('revealCover');
+            if (cover) {
+                // Magical reveal animation
+                cover.style.transform = 'scale(0) rotate(180deg)';
+                cover.style.opacity = '0';
+                
+                // Create sparkle burst effect
+                const frame = cover.parentElement;
+                const sparkles = ['✨', '💖', '💫', '🌟', '💕'];
+                
+                for (let i = 0; i < 12; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                    sparkle.style.position = 'absolute';
+                    sparkle.style.fontSize = '1.5rem';
+                    sparkle.style.left = '50%';
+                    sparkle.style.top = '50%';
+                    sparkle.style.pointerEvents = 'none';
+                    sparkle.style.zIndex = '20';
+                    
+                    const angle = (Math.PI * 2 * i) / 12;
+                    const distance = 100;
+                    
+                    frame.appendChild(sparkle);
+                    
+                    // Animate sparkle burst
+                    setTimeout(() => {
+                        sparkle.style.transition = 'all 1s ease-out';
+                        sparkle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(1.5) rotate(360deg)`;
+                        sparkle.style.opacity = '0';
+                        
+                        setTimeout(() => sparkle.remove(), 1000);
+                    }, 10);
+                }
+                
+                // Remove cover after animation
+                setTimeout(() => cover.remove(), 800);
+            }
+        }
+    </script>
+    
+    <audio id="bgMusic" loop>
+        <source src="assets/music/m1.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>
