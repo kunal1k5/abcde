@@ -7,10 +7,18 @@
 // INITIALIZATION
 // ==========================================
 document.addEventListener('DOMContentLoaded', function() {
+    // Detect mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
     initializeMusic();
-    initializeAnimations();
-    createFloatingHearts();
-    createSparkles();
+    
+    // Skip heavy animations on mobile
+    if (!isMobile) {
+        initializeAnimations();
+        createFloatingHearts();
+        createSparkles();
+    }
+    
     initializeScrollAnimations();
     initializePageSpecificEffects();
     console.log('💕 Love website loaded successfully! 💕');
@@ -191,12 +199,14 @@ function initializeReasonsPage() {
 }
 
 function initializeThanksPage() {
-    // Start confetti and hearts rain
-    createConfetti();
-    createHeartsRain();
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
     
-    // Continuous confetti
-    setInterval(createConfetti, 5000);
+    // Reduced effects on mobile
+    if (!isMobile) {
+        createConfetti();
+        createHeartsRain();
+        setInterval(createConfetti, 8000);
+    }
 }
 
 // Magic effect for Forever button
@@ -261,7 +271,7 @@ function createFloatingHearts() {
     const heartEmojis = ['💕', '💖', '💗', '💓', '💝'];
     
     // Create multiple hearts
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 4; i++) {
         const heart = document.createElement('div');
         heart.classList.add('floating-heart');
         heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
@@ -287,7 +297,7 @@ function createSparkles() {
     if (!sparklesContainer) return;
     
     setInterval(() => {
-        if (Math.random() > 0.7) {
+        if (Math.random() > 0.9) {
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
             sparkle.textContent = '✨';
@@ -305,7 +315,7 @@ function createSparkles() {
                 sparkle.remove();
             }, 2000);
         }
-    }, 500);
+    }, 1000);
 }
 
 // ==========================================
@@ -317,7 +327,7 @@ function createConfetti() {
     
     const confettiItems = ['✨', '🌟', '💫', '⭐'];
     
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) {
         setTimeout(() => {
             const confetti = document.createElement('div');
             confetti.textContent = confettiItems[Math.floor(Math.random() * confettiItems.length)];
@@ -363,7 +373,7 @@ function createHeartsRain() {
         setTimeout(() => {
             heart.remove();
         }, 7000);
-    }, 800);
+    }, 1500);
 }
 
 // ==========================================
@@ -592,6 +602,23 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         el.style.transition = 'none';
     });
 }
+
+// Mobile-specific optimizations
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+if (isMobile) {
+    // Disable heavy visual effects on mobile
+    document.querySelectorAll('.orb, .floating-flowers, .sparkles-container').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Reduce animation duration for remaining elements
+    document.documentElement.style.setProperty('--animation-speed', '0.5');
+}
+
+// Passive event listeners for better scroll performance
+document.addEventListener('touchstart', function() {}, { passive: true });
+document.addEventListener('touchmove', function() {}, { passive: true });
 
 // Smooth page load
 window.addEventListener('load', () => {

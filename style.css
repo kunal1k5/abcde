@@ -46,6 +46,13 @@
     box-sizing: border-box;
 }
 
+/* Performance Optimizations */
+.orb, .bg-layer, .gradient-overlay, .floating-hearts, .sparkles-container {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -58,7 +65,7 @@ body {
     position: relative;
     min-height: 100vh;
     background: var(--gradient-fairy);
-    animation: bodyGlow 10s ease infinite;
+    animation: none;
 }
 
 @keyframes bodyGlow {
@@ -80,20 +87,16 @@ body {
 }
 
 .bg-layer-1 {
-    background: radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(230, 230, 250, 0.4) 0%, transparent 50%);
-    animation: bgFloat1 20s ease-in-out infinite;
+    background: radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.3) 0%, transparent 50%);
+    animation: none;
 }
 
 .bg-layer-2 {
-    background: radial-gradient(circle at 60% 40%, rgba(255, 218, 185, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 40% 80%, rgba(216, 191, 216, 0.3) 0%, transparent 60%);
-    animation: bgFloat2 25s ease-in-out infinite reverse;
+    display: none;
 }
 
 .bg-layer-3 {
-    background: radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.2) 0%, transparent 70%);
-    animation: bgFloat3 30s ease-in-out infinite;
+    display: none;
 }
 
 @keyframes bgFloat1 {
@@ -120,13 +123,10 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(45deg, 
-        rgba(255, 182, 193, 0.1),
-        rgba(230, 230, 250, 0.1),
-        rgba(255, 218, 185, 0.1),
-        rgba(216, 191, 216, 0.1)
+        rgba(255, 182, 193, 0.05),
+        rgba(230, 230, 250, 0.05)
     );
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    animation: none;
     pointer-events: none;
     z-index: 2;
 }
@@ -153,9 +153,10 @@ body {
 .orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.6;
+    filter: blur(20px);
+    opacity: 0.4;
     animation: orbFloat 20s ease-in-out infinite;
+    will-change: transform;
 }
 
 .orb-1 {
@@ -186,39 +187,21 @@ body {
 }
 
 .orb-4 {
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(216, 191, 216, 0.5), transparent);
-    top: 30%;
-    right: 30%;
-    animation-delay: 9s;
+    display: none;
 }
 
 .orb-5 {
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle, rgba(255, 192, 203, 0.6), transparent);
-    bottom: 40%;
-    right: 40%;
-    animation-delay: 12s;
+    display: none;
 }
 
 @keyframes orbFloat {
     0%, 100% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.6;
-    }
-    25% {
-        transform: translate(30px, -50px) scale(1.1);
-        opacity: 0.8;
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.4;
     }
     50% {
-        transform: translate(-20px, 30px) scale(0.9);
+        transform: translate3d(20px, 20px, 0) scale(1.05);
         opacity: 0.5;
-    }
-    75% {
-        transform: translate(40px, 20px) scale(1.05);
-        opacity: 0.7;
     }
 }
 
@@ -261,19 +244,11 @@ body {
 
 @keyframes floatHeart {
     0%, 100% { 
-        transform: translateY(0) rotate(0deg) scale(1); 
+        transform: translate3d(0, 0, 0) scale(1); 
         opacity: 0.4;
     }
-    25% { 
-        transform: translateY(-30px) rotate(10deg) scale(1.1); 
-        opacity: 0.7;
-    }
     50% { 
-        transform: translateY(-60px) rotate(-10deg) scale(0.9); 
-        opacity: 0.5;
-    }
-    75% { 
-        transform: translateY(-30px) rotate(5deg) scale(1.05); 
+        transform: translate3d(0, -40px, 0) scale(1.05); 
         opacity: 0.6;
     }
 }
@@ -290,12 +265,10 @@ body {
     pointer-events: none;
     z-index: 5;
     background-image: 
-        radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255, 182, 193, 0.7) 1px, transparent 1px),
-        radial-gradient(circle, rgba(230, 230, 250, 0.7) 1px, transparent 1px);
-    background-size: 60px 60px, 90px 90px, 120px 120px;
-    background-position: 0 0, 30px 30px, 60px 60px;
-    animation: sparkleMove 25s linear infinite;
+        radial-gradient(circle, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 0 0;
+    animation: none;
 }
 
 @keyframes sparkleMove {
@@ -1305,4 +1278,104 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--gradient-sunset);
+}
+
+/* ==========================================
+   MOBILE OPTIMIZATIONS
+   ========================================== */
+@media (max-width: 768px) {
+    /* Disable heavy animations on mobile */
+    .orb, .bg-layer, .gradient-overlay {
+        animation: none !important;
+        opacity: 0.3 !important;
+    }
+    
+    /* Hide orbs on mobile - too expensive */
+    .orb-1, .orb-2, .orb-3 {
+        display: none !important;
+    }
+    
+    /* Simplify background */
+    .bg-layer-1 {
+        background: rgba(255, 182, 193, 0.2);
+    }
+    
+    /* Disable sparkles on mobile */
+    .sparkles-container {
+        display: none !important;
+    }
+    
+    /* Reduce floating elements */
+    .floating-hearts::before,
+    .floating-hearts::after {
+        animation: none !important;
+        display: none;
+    }
+    
+    /* Disable blur effects - very expensive on mobile GPU */
+    * {
+        filter: none !important;
+        backdrop-filter: none !important;
+    }
+    
+    /* Simplify shadows */
+    .welcome-frame,
+    .glass-card,
+    .photo-card,
+    .flip-card,
+    .reason-item {
+        box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2) !important;
+    }
+    
+    /* Disable text shadows and glows */
+    h1, h2, h3, .title {
+        text-shadow: none !important;
+    }
+    
+    /* Reduce corner flourishes */
+    .corner-flourish {
+        display: none !important;
+    }
+    
+    /* Simplify music button */
+    .music-btn-glow {
+        display: none !important;
+    }
+    
+    /* Remove transform animations on scroll */
+    .reason-item {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ultra-light mode for small phones */
+    body {
+        background: linear-gradient(135deg, #FFB6C1, #E6E6FA) !important;
+        animation: none !important;
+    }
+    
+    /* Disable all decorative layers */
+    .glow-orbs,
+    .floating-flowers,
+    .floating-hearts {
+        display: none !important;
+    }
+    
+    /* Simplify cards further */
+    .glass-card,
+    .photo-card,
+    .flip-card {
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: none !important;
+    }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
 }
